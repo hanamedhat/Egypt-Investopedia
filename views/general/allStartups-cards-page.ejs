@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/allStartup-card-page.css" />
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/chat.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body>
+    <%- include('../includes/nav.ejs') %>
+    
+    <section class="filters">
+      <form action="/filter-startups" method="GET">
+        <select name="stage" id="stage">
+          <option value="">Select Stage</option>
+          <option value="Achieving-Sales">Achieving Sales</option>
+          <option value="Breaking-Even">Breaking Even</option>
+          <option value="MVP-Finished-Product">MVP/Finished Product</option>
+          <option value="Other">Other</option>
+          <option value="Pre-Startup/R&D">Pre-Startup/R&D</option>
+          <option value="Profitable">Profitable</option>
+        </select>
+      
+        <select name="industry" id="industry">
+          <option value="">Select Industry</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Automotive">Automotive</option>
+          <option value="Biotechnology">Biotechnology</option>
+          <option value="Construction">Construction</option>
+          <option value="Consumer Goods">Consumer Goods</option>
+          <option value="Education">Education</option>
+          <option value="Energy">Energy</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Finance">Finance</option>
+          <option value="Food & Beverage">Food & Beverage</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Hospitality">Hospitality</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Manufacturing">Manufacturing</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Media">Media</option>
+          <option value="Real Estate">Real Estate</option>
+          <option value="Retail">Retail</option>
+          <option value="Telecommunications">Telecommunications</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Travel & Tourism">Travel & Tourism</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Other">Other</option>
+        </select>
+      
+        <select name="investmentType" id="investmentType">
+          <option value="">Select Investment Type</option>
+          <option value="Loan">Loan</option>
+          <option value="Equity">Equity</option>
+        </select>
+        <input type="text" placeholder="What are you looking for?">
+      
+        <button type="submit">Apply</button>
+        <button type="submit" formaction="/clear-filters" formmethod="GET">Clear Filters</button>
+      </form>
+    </section>
+    <section class="intro-section">
+      <h1>Recent Business Proposals</h1>
+      <p>Our platform offers a wide range of investment opportunities in Middle East, from early-stage startups seeking seed funding to established companies in need of expansion capital. You can refine your search by criteria like stage, investment type, and industry, ensuring a personalized selection that aligns with your goals, whether it's quirky dining establishments or tech firms.</p>
+    </section>
+    <div class="container py-5" id="startupsContainer">
+      <% for (let i = 0; i < startups.length; i += 3) { %>
+      <div class="row row-cols-1 row-cols-md-3 g-4 py-5 startup-row <%= i >= 6 ? 'd-none' : '' %>">
+          <% for (let j = i; j < i + 3 && j < startups.length; j++) { %>
+          <div class="col">
+              <div class="card">
+                  <div class="card__inner">
+                      <div class="card__face card__face--front box">
+                          <div class="card_content startup-card">
+                              <img src="/uploads/<%= startups[j].logo %>" alt="" class="imgg" />
+                              <h2></h2>
+                              <div class="card_body">
+                                  <h1><%= startups[j].companyName %></h1>
+                                  <h4>Founder: <%= startups[j].User.firstName.charAt(0).toUpperCase() + startups[j].User.firstName.slice(1) %> <%= startups[j].User.lastName.charAt(0).toUpperCase() + startups[j].User.lastName.slice(1) %></h4>
+                                  <div class="money-text">
+                                      <div>
+                                          <p>Total Required</p>
+                                          <p class="egb"><%= startups[j].theDeal %> EGP</p>
+                                      </div>
+                                      <div>
+                                          <p>Min Per Investor</p>
+                                          <p class="egb"><%= startups[j].minInvestmentPp %> EGP</p>
+                                      </div>
+                                  </div>
+                                  <div class="mb-5 d-flex justify-content-around">
+                                      <button class="btn btn-primary">
+                                        <a href="/egypt-investopedia/startup-details/<%= startups[j].startupId %>" class="card-link">View Details</a>
+                                      </button>
+                                      <button class="btn btn-primary">
+                                          <a href="/send-offer/<%= startups[j].startupId %>" class="card-link">Start Investing</a>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card__face card__face--back">
+                          <div class="card_content">
+                              <div class="card_header">
+                                  <img src="/uploads/<%= startups[j].logo %>" alt="" class="pp" />
+                                  <h2><%= startups[j].companyName %></h2>
+                              </div>
+                              <div class="card_body">
+                                <h4 style="margin-top: 2rem;margin-bottom: 1rem;">Investment Type:</h4>
+                                  <h3><%= startups[j].investmentType %></h3>
+                                  <h4 style="margin-bottom: 1rem;">Short Summary:</h4>
+                                  <p>
+                                      <%= startups[j].businessExplanation %>
+                                  </p>
+                                  <h4  style="margin-top: 2rem;margin-bottom: 1rem;">Net Profit Last Year: </h4>
+                                  <p><%= startups[j].nonProfit %></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <% } %>
+      </div>
+      <% } %>
+  </div>
+  
+  <% if (startups.length > 6) { %>
+  <div class="container text-center">
+      <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+  </div>
+  <% } %>
+  <%- include('../includes/footer.ejs') %>
+    <!-- </section>-->
+    <script src="/js/allStartup-card-page.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 2; // Adjust to correctly show after the initial rows
+    const rows = document.querySelectorAll('.startup-row');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    console.log('Total rows:', rows.length); // Debugging statement
+
+    loadMoreBtn.addEventListener('click', function() {
+        console.log('Load More button clicked'); // Debugging statement
+        let newRowLimit = currentIndex + 1; // Adjust to reveal only one row at a time
+        for (let i = currentIndex; i < newRowLimit && i < rows.length; i++) {
+            console.log('Inside the loop, index:', i); // Debugging statement
+            rows[i].classList.remove('d-none');
+        }
+        currentIndex++;
+        if (currentIndex >= rows.length) {
+            loadMoreBtn.style.display = 'none';
+        }
+    });
+});
+  </script>
+  </body>
+</html>

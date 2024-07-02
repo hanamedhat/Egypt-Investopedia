@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    
+</head>
+<body> 
+    
+<div class="containerr">
+    <div class="sidebar" >
+        <h2>Advisor Dashboard</h2>
+        <ul>
+            
+            <li><a href="/advisor/index">Home</a></li>
+            <li><a href="/advisor/startups">Startup Requests</a></li>
+            <li><a href="/advisor/meetings">Schedule Meetings</a></li>
+            <li><a href="/advisor-dashboard">Chat Requests</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>Select a section from the navigation menu to get started.</p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <h3>Total Investors</h3>
+                <p><%= investorCount %></p>
+            </div>
+            <div class="stat-item">
+                <h3>Total Startups</h3>
+                <p><%= startupCount %></p>
+            </div>
+            <div class="stat-item">
+                <h3>Total Startup Owners</h3>
+                <p><%= stOwnerCount %></p>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/js/admin.js">
+       
+    </script>
+</body>
+</html>

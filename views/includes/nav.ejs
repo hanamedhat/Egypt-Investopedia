@@ -1,0 +1,35 @@
+<nav>
+    <div class="logo-container">
+        <img class="logo" src="/images/logograd2.svg" alt="">
+        <p>EGYPT INVESTOPEDIA</p>
+        <i class="fa-solid fa-bars" id="menu-toggle"></i>
+    </div>
+    <div class="links-container ">
+        <ul>
+            <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="/egypt-investopedia/startups"><i class="fas fa-rocket"></i> Startups</a></li>
+            <li><a href="/egypt-investopedia/events"><i class="fa-solid fa-calendar"></i> Forums</a></li>
+            <li><a href="/egypt-investopedia/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <% if (!isAuthenticated) { %> <!-- Check if user is not logged in -->
+                <li><a href="/egypt-investopedia/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+            <% } else { %> <!-- If user is logged in, display profile icon -->
+                <form action="/logout" method="GET">
+                    <li><a href=""> <button type="submit" style="font-size:18px ;background:none;border:none;padding:0;margin:0;color:inherit;cursor:pointer;">
+                        <i class="fa-solid fa-right-to-bracket"></i> Logout
+                    </button>
+                        </a>
+                    </li>
+                </form>
+                <% if (userType === 'Investor') { %>
+                    <li><a class="link-profile" href="/egypt-investopedia/investor-profile/<%= user.userid %>"><i class="fa-solid fa-user profile"></i></a></li>
+                <% } else if (userType === 'startupOwner') { %>
+                    <li><a  class="link-profile" href="/egypt-investopedia/startup-profile/<%= user.userid %>"><i class="fa-solid fa-user profile"></i></a></li>
+                <% } else if (userType === 'admin') {%>
+                    <li><a  class="link-profile" href="/admin/index"><i class="fa-solid fa-user profile"></i></a></li>
+                <% } else if (userType === 'advisor') {%>
+                    <li><a  class="link-profile" href="/advisor/index"><i class="fa-solid fa-user profile"></i></a></li>
+            <% }} %>
+        </ul>
+    </div>
+    <!-- <a href=""><i class="fa-solid fa-user profile"></i></a>  -->
+</nav>

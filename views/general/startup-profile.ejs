@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+    <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+        <i class="fa-solid fa-comment-dots"></i>
+    </div>
+    <span style="display: none;" id="userSpan"><%=user.userid%></span>
+    <% }else{%>
+        <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+        <i class="fa-solid fa-comment-dots"></i>
+    </div>
+    <%} %>
+    <header class="header-links">
+        <input type="hidden" name="userid" value="<%= user.userid %>">
+        <input type="hidden" name="userid" value="<%= startup.startupId %>">
+            <ul>
+                <li><a href="/egypt-investopedia/startup-profile/<%=user.userid%>">My Startup</a></li>
+                <!-- <li><a href="/egypt-investopedia/startup-profile/myinvestor/<%=user.userid%>">My Investors</a></li> -->
+                <li><a href="/egypt-investopedia/startup-profile/offers/<%=user.userid%>">My Offers</a></li>
+            </ul>
+            <a href="">
+                <div class="profile-name">
+                    <span><%= user.firstName.charAt(0).toUpperCase() %><%= user.lastName.charAt(0).toUpperCase() %></span>
+                </div>
+            </a>
+    </header>
+    <main>
+        
+        <section class="profile-summary">
+            <div style="display: flex;">
+                <img src="<%= startup.logo ? `/uploads/${startup.logo}` : '/images/dbbg(1) - Copy.jpg' %>"  height="120" alt="">
+                <div style="margin-left: 2rem;">
+                    <h1 style="margin-bottom: 0!important;color: #002040;"><%= startup.companyName %></h1>
+                    <p style="margin-top: 5px!important;color: #002040;"><span style="color: rgb(108, 106, 106);">Owner:</span> <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %> <%= user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1) %></p>
+                    <% if(user.package === 'pending') {%>
+                        <p style="color: #ffcc00;">Your pitch is finalized and ready for review</p>
+                        <%}else{%>
+                        <p style="color: #ffcc00;">Your pitch is still in draft mode</p>
+                        <%}%>
+                </div>
+            </div>
+            <div>
+                <% if(user.package === 'pending') {%>
+                    <a style="display: none;" href="/egypt-investopedia/Packages"><button style="cursor: pointer;margin-top: 2.1rem" class="buy-package-btn">Buy Package</button></a>
+                <%}else{%>
+                    <a style="color: white;text-decoration: none;cursor: pointer;" href="/egypt-investopedia/Packages"><button style="cursor: pointer;margin-top: 2.1rem" class="buy-package-btn">Buy Package</button></a>
+                <%}%>    
+            </div>
+        </section>
+        
+        <section class="tasks">
+            <div class="tasks-header">
+                <div class="icons">
+                    <a href="/egypt-investopedia/startup-profile/edit/<%= user.userid %>">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/egypt-investopedia/startup-details/<%= startup.startupId %>">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+            <ul>
+                <li class="complete" id="editStartup">Edit Startup info</li>
+                <li class="complete" id="editSummary">Edit Summary</li>
+                <li class="complete" id="editStructure">Edit Business Structure</li>
+                <li class="complete" id="editDeal">Edit Deal</li>
+                <li class="complete" id="addDocs">Add Docs</li>
+                <li class="complete" id="editTeam">Edit Team</li>
+                <li class="complete" id="editHighlights">Edit Highlights</li>
+                <li class="complete" id="editLogo">Edit Logo</li>
+                <li class="complete" id="addImages">Add Product Images</li>
+            </ul>
+        </section>
+        <section class="chat-highlights">
+            <h2>Chat Highlights</h2>
+            <div class="highlights">
+                <% if (highlights) { %>
+                    <% highlights.forEach(highlight => { %>
+                      <div class="highlight-card">
+                        <h3>Advisor Name: John Doe</h3>
+                        <p><strong>Date:</strong> <%= highlight.date %></p>
+                        <p><strong>Time:</strong> <%= highlight.time %></p>
+                        <p><strong>Highlights:</strong> <%= highlight.highlightDescription %></p>
+                      </div>
+                    <% }) %>
+                  <% } else { %>
+                    <div class="highlight-card">No chat highlights yet.</div>
+                  <% } %>
+                  
+            </div>
+        </section>
+    </main>
+    <%- include('../includes/footer.ejs') %>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <script src="/js/profile.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('editTeam').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=7`;
+    });
+
+    // Add Financials
+    document.getElementById('editStartup').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=1`; // Assuming page 8 is for adding financials
+    });
+
+    // Add Logo (similarly for other items)
+    document.getElementById('editSummary').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=2`; // Assuming page 9 is for adding logo
+    });
+
+    // Add Website
+    document.getElementById('editStructure').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=3`; // Assuming page 10 is for adding website
+    });
+
+    // Add Images
+    document.getElementById('editDeal').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=4`; // Assuming page 11 is for adding images
+    });
+
+    // Add Video
+    document.getElementById('addDocs').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=5`; // Assuming page 12 is for adding video
+    });
+
+    // Add Docs
+    document.getElementById('editHighlights').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=6`; // Assuming page 13 is for adding documents
+    });
+
+    document.getElementById('editLogo').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=5`; // Assuming page 13 is for adding documents
+    });
+
+    document.getElementById('addImages').addEventListener('click', function() {
+        const userId = '<%= user.userid %>';
+        window.location.href = `/egypt-investopedia/startup-profile/edit/${userId}?openPage=5`; // Assuming page 13 is for adding documents
+    });
+        });
+    </script>
+    
+</body>
+</html>

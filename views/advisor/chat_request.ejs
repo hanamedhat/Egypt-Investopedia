@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat request</title>
+    <link rel="stylesheet" href="/css/chat-requests.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="./startup.css"> -->
+</head>
+
+<body>
+    <div class="containerr">
+    <div class="sidebar">
+        <h2>Advisor Dashboard</h2>
+        <ul>
+            <li><a href="/advisor/index">Home</a></li>
+            <li><a href="/advisor/startups">Startup Requests</a></li>
+            <li><a href="/advisor/meetings">Schedule Meetings</a></li>
+            <li><a href="/advisor-dashboard">Chat Requests</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Chatting Dashboard</h1>
+        <div id="events-list" class="cont">
+            <div class="chat-requests" id="chat-requests">
+                <h3 style=" margin:20px;"><strong>Total Requests: </strong> <span id="totalRequests"></span></h3>
+
+            </div>
+            <div class="highlights" id="highlightsContainer">
+                <h3 style=" margin:20px;">Chat Highlights</h3>
+                <!-- <div class="request">
+                    <div class="name">id: <span id="highLightUserId"></span></div>
+                    <p id = "highlightDescription"class="chat-highlight"></p>
+                </div> -->
+            </div>
+        </div>
+        <div id="containter-chatBox" style="display:flex;">
+            <form action="/send_highlight" method="POST" id="highlights" onsubmit="return false;"></form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat-advisor.js"></script>
+
+</body>
+</html>

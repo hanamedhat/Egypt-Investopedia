@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Form</title>
+    <link rel="stylesheet" href="/css/investorform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img class="logo" src="/images/logograd2.svg" alt="">
+            <p>EGYPT INVESTOPEDIA</p>
+            <i class="fa-solid fa-bars" id="menu-toggle"></i>
+        </div>
+        
+        <div class="links-container ">
+            <ul>
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href=""><i class="fas fa-rocket"></i> Startups</a></li>
+                <li><a href=""><i class="fa-solid fa-calendar"></i> Forums</a></li>
+                <li><a href="/egypt-investopedia/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <!-- <if (!isAuthenticated) {  Check if user is not logged in -->
+                    <li><a href="/egypt-investopedia/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                    </form>
+                
+            </ul>
+        </div>
+        <!-- <a href=""><i class="fa-solid fa-user profile"></i></a>  -->
+    </nav>
+    <main>
+
+        <div class="sidebar">
+            <ul class="steps-list">
+                <li id="step1">Investment Details</li>
+                <li id="step2">Professional Background</li>
+                <li id="step3">ROI Expectations</li>
+                <li id="step4">Investment Preferences</li>
+                <li id="step5">Additional Information</li>
+                <li id="step6">Review and Submit</li>
+            </ul>
+        </div>
+<div class="container">
+    
+    <div class="left-side">
+        <div >
+            <p class="motivation-word">Five steps to complete you profile!</p>
+        <div class="progress-indicator">
+            <div class="step" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step2">3</div>
+            <div class="step" id="step2">4</div>
+            <div class="step" id="step2">5</div>
+            <div class="step" id="step3">R</div>
+            <div class="progress-line"></div>
+        </div>
+    </div>
+        <form id="investmentForm" action="/investor-info" method="POST">
+            <input type="hidden" name="userid" value="<%= userId %>">
+            <!-- Progress Indicator -->
+            
+
+            <!-- Page 1 -->
+            <div class="form-page" id="page1">
+                <h1>Investment Details</h1>
+                <label for="money">1- How much are you looking to invest? 
+                    <!-- <span class="info-icon" onclick="showInfo('info1')"><i class="fa-solid fa-circle-info"></i></span> -->
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Enter the amount of money you are willing to invest.</span>
+                    </span>
+                </label>
+                <input type="number" id="money" name="wantedAmount" required>
+                <!-- <div class="info-text" id="info1">Enter the amount of money you are willing to invest.</div> -->
+
+                <label for="industry" style="margin-bottom: 20px;">2- Industries you are interested in?
+                    
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Select the industries you are interested in investing in.</span>
+                    </span>
+                    </label>
+                <select id="industry" name="industries" multiple  >
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Business Service">Business Service</option>
+                    <option value="Education">Education</option>
+                    <option value="Energy&Natural Resources">Energy&Natural Resources</option>
+                    <option value="Entertainment & Leisure">Entertainment & Leisure</option>
+                    <option value="Fashion & Beauty">Fashion & Beauty</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Food&Bevrage">Food&Bevrage </option>
+                    <option value="Manufacturing & Engineering">Manufacturing & Engineering</option>
+                    <option value="Hospitality, Restaurant & Bars">Hospitality, Restaurant & Bars</option>
+                    <option value="Media">Media</option>
+                    <option value="Medical & Science">Medical & Science</option>
+                    <option value="Personal Services">Personal Services</option>
+                    <option value="Products & Inventions">Products & Inventions</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Property">Property</option>
+                    <option value="Sales & Marketing">Sales & Marketing</option>
+                    <option value="Software">Software</option>
+                </select>
+               
+
+                <label for="risk" style="margin-top: 1.5rem;">3- Risk tolerance 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Choose your risk tolerance level.</span>
+                    </span>
+                </label>
+                <select id="risk" name="riskTolerance" >
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <button type="button" class="next-btn" onclick="nextPage(2)">Next</button>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="form-page" id="page2" style="display:none;">
+                <h2>Professional Background</h2>
+
+                <label for="background">4- Professional background 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Provide information about your professional background.</span>
+                    </span>
+                </label>
+                <input type="text" id="background" name="profBackground" required>
+               
+
+                <label for="area">5- Area of expertise 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Indicate your area of expertise.</span>
+                    </span>
+                </label>
+                <input type="text" id="area" name="areaOfExpertise" required>
+                
+                <div>
+                    <button type="button" class="prev-btn" onclick="prevPage(1)">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextPage(3)">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="form-page" id="page3" style="display:none;">
+                <h2>ROI Expectations</h2>
+
+                <label for="ROI">6- What are your ROI expectations for your investments? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Specify your ROI expectations.</span>
+                    </span>
+                </label>
+                <input type="text" id="ROI" name="roiExpectations" required>
+               
+
+                <label for="fixed">7- Do you prefer your return on investment (ROI) to be fixed or variable? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Choose your preference for fixed or variable ROI.</span>
+                    </span>
+                </label>
+                <select id="fixed" name="ROI" required>
+                    <option value="Fixed ROI">Fixed ROI</option>
+                    <option value="Variable ROI">Variable ROI</option>
+                    <option value="No preference">No preference</option>
+                </select>
+               
+                <div>
+                    <button type="button" class="prev-btn" onclick="prevPage(2)">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextPage(4)">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="form-page" id="page4" style="display:none;">
+                <h2>Investment Preferences</h2>
+
+                <label for="horizon">8- What is your typical investment horizon? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Indicate your typical investment horizon.</span>
+                    </span>
+                </label>
+                <input type="text" id="horizon" name="investmentHorizon" required placeholder="e.g., 1-3 years, 3-5 years, 5+ years">
+              
+                <label for="invol">9- What level of involvement do you prefer in your investments? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Specify your preferred level of involvement.</span>
+                    </span>
+                </label>
+                <input type="text" id="invol" name="involvementLevel" required placeholder="e.g., active involvement, board membership, advisory, passive investor">
+                
+
+                <label for="value">10- What additional value can you bring to the investments you make? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Indicate the additional value you can bring to the investments</span>
+                    </span>
+                </label>
+                <input type="text" id="value" name="additionalValue" required placeholder="e.g., strategic advice, industry connections, operational support">
+               
+                <div>
+                    <button type="button" class="prev-btn" onclick="prevPage(3)">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextPage(5)">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 5 -->
+            <div class="form-page" id="page5" style="display:none;">
+                <h2>Additional Information</h2>
+
+                <label for="comment">11- Do you have any additional comments or questions for us? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Provide any additional comments or questions.</span>
+                    </span>
+                </label>
+                <input type="text" id="comment" name="comments" required>
+               
+
+                <label for="mprofit">12- What type of investment do you prefer? 
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Provide any additional comments or questions.</span>
+                    </span>
+                </label>
+                <label class="type" for="firstRadio">Loan</label>
+                <input class="form-check-input me-1" type="radio" name="investmentType" value="loan" id="firstRadio" checked>
+                <label class="type" for="secondRadio">Equity</label>
+                <input class="form-check-input me-1" type="radio" name="investmentType" value="equity" id="secondRadio">
+                <textarea placeholder="Write your preference reason" name="preference" id="preferenceReason" cols="30" rows="10"></textarea>
+                <div>
+                    <button type="button" class="prev-btn" onclick="prevPage(4)">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextPage(6)">Next</button>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="form-page" id="page6" style="display:none;">
+                <h2>Review and Submit</h2>
+                <p>Please review your information before submitting.</p>
+                <!-- Display Summary -->
+                <div id="summary"></div>
+                <div>
+                    <button type="button" class="prev-btn" onclick="prevPage(5)">Previous</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="right-side">
+       
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+            <button class="faq-question">What is the purpose of this form?</button>
+            <div class="faq-answer">
+                <p>This form helps us understand your investment preferences and connect you with suitable opportunities.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <button class="faq-question">How is my information used?</button>
+            <div class="faq-answer">
+                <p>Your information is used to tailor the investment opportunities and resources we provide you.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <button class="faq-question">Can I save my progress and complete it later?</button>
+            <div class="faq-answer">
+                <p>Currently, you need to complete the form in one session, but we're working on adding a save progress feature.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <button class="faq-question">Who can I contact for support?</button>
+            <div class="faq-answer">
+                <p>If you need any assistance, please contact our support team at support@example.com.</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+</main>
+<script src="/js/investorform.js"></script>
+
+</body>
+</html>

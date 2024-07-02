@@ -1,0 +1,271 @@
+body{
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    min-height: 100vh!important;
+}
+.containerr{
+    display: flex;
+    width: 100%;
+}
+.sidebar {
+    background-color: #002040;
+    color: #ffcc00;
+    width: 17%;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 100vh!important;
+}
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #ffcc00;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: #004080;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ffcc00;
+    color: #002040;
+    transform: scale(1.05);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-left: 5px solid #002040;
+    width: 83%;
+}
+
+.content h1 {
+    margin-top: 0;
+    color: #002040;
+    font-size: 2em!important;
+    font-weight: bold!important;
+}
+.btn1{
+    margin: 0!important;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+button {
+    background-color: #002040;
+    color: #ffcc00;
+    border: none;
+    padding: 7px 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #ffcc00;
+    color: #002040;
+    transform: scale(1.05);
+}
+
+form h3 {
+    color: #002040;
+}
+
+form input, form button {
+    display: block;
+    width: calc(100% - 30px);
+    margin: 5px 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+form input {
+    border: 1px solid #002040;
+    border-radius: 5px;
+}
+.meeting-input, select{
+    display: block;
+    width: calc(100% - 30px);
+    margin: 5px 0;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #002040;
+    border-radius: 5px;
+}
+select{
+    margin-bottom: 2rem!important;
+}
+form button {
+    width: auto;
+}
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    flex: 1 1 30%;
+    background: #f4f4f4;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-item img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.event-info {
+    flex: 1;
+}
+
+.event-date-time {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.event-location {
+    font-size: 14px;
+    color: #666;
+}
+
+.buy-tickets {
+    background: #ffcc00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.buy-tickets:hover{
+    background-color: #002040;
+    color: #ffcc00;
+    transform: scale(1.05); 
+}
+.btn-events{
+    background: #002040;
+    color: #fff;
+    border: none!important;
+    padding: 10px 20px!important;
+    border-radius: 5px!important;
+    cursor: pointer!important;
+    align-self: center!important;
+}
+.form-delete{
+    align-self: center!important;
+}
+.event-item button{
+    height: 40px;
+}
+main {
+    padding: 20px 100px;
+}
+
+.offers {
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ffcc00b1;
+    border-radius: 10px;
+}
+
+.offers h1 {
+    color: #00274d; /* Dark blue text */
+    margin-bottom: 20px;
+}
+
+.offer {
+    border: 1px solid #00274dad;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+h2{
+    font-size: 1.5em!important;
+    font-weight: bold!important;
+    margin-block-start: 0.83em!important;
+    margin-block-end: 0.83em!important;
+    margin-inline-start: 0px!important;
+    margin-inline-end: 0px!important; 
+}
+.offer h2 {
+    margin-top: 0;
+    color: #00274d; /* Dark blue text */
+    font-size: 1.5em!important;
+    font-weight: bold!important;
+}
+
+.offer p {
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.accept {
+    background-color:#ffcc00 ;
+    color: #00204d;
+}
+
+.reject {
+    background-color:#00204d ;
+    color: white;
+}

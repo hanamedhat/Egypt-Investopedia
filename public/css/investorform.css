@@ -1,0 +1,369 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+nav {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    /* position: absolute;
+    top: 0; */
+    /* z-index: 1; */
+    background-color: #002040;
+    
+    /* border: 3px solid yellow; */
+}
+.logo-container {
+    display: flex;
+    margin-left: 2.5rem;
+    margin-top: 10px;
+    width: 30%;
+    transition: background-color 0.3s ease;
+}
+.logo-container p {
+    color: #ffcc00;
+    margin-left: 1rem;
+    margin-top: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+.links-container {
+    width: 60%;
+    margin-top: 1rem;
+}
+
+.links-container ul {
+    display: flex;
+    list-style: none;
+}
+.links-container ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 2rem;
+    position: relative; 
+    /* border: 1px solid white; */
+    display: flex;
+}
+.links-container ul li a:hover{
+    color: #ffcc00;
+}
+.links-container ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 0; /* Initially set width to 0 */
+    height: 3px; /* Adjust the thickness of the line */
+    background-color: #ffcc00; /* Change the color of the line */
+    transition: width 1s ease; /* Add transition for smooth effect */
+}
+.links-container ul li a:hover::before {
+    width: 100%; /* Expand the width to create the line */
+}
+.links-container ul li a i{
+    padding-right: 10px;
+}
+.logo {
+    height: 70px;
+    width: 70px;
+}
+.fa-bars {
+    color: white;
+    font-size: 28px;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+    display: none;
+    visibility: hidden;
+    margin-top: 1.2rem;
+}
+.logo-container.active {
+    background-color: #002040; /* Same color as the .links-container background */
+}
+.links-container.show {
+    max-height: 300px; /* Adjust this value based on the number of links */
+}
+
+/* .logo {
+    width: 110px;
+    height: auto;
+    padding-top: 10px;
+    margin-left: 50px;
+} */
+main{
+    display: flex;
+    /* border: 1px solid red; */
+}
+.container {
+    display: flex;
+    width: 85%;
+    /* margin-top: 5rem; */
+    /* margin: auto auto; */
+    background: #fff;
+    padding:20px;
+    border-radius: 8px;
+    /* box-shadow: 0px 3px 18px 3px #c9bc8a; */
+    /* height: 110vh; */
+}
+
+.left-side, .right-side {
+    padding:20px;
+}
+
+.left-side {
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 95%;
+    width: 70%;
+    /* border: 1px solid red; */
+}
+
+.right-side {
+    padding-left: 40px;
+    width: 30%;
+
+}
+
+h1, h2 {
+    text-align: center;
+    /* font-style: oblique; */
+    font-weight: bold;
+    color: #002040;
+    padding-bottom: 1.8rem;
+    margin: 0;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, select, textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.next-btn, .submit-btn {
+    background-color: #ffcc00;
+    color: #002040;
+    width: 90px;
+}
+
+.prev-btn {
+    background-color: #002040;
+    color: #ffcc00;
+    width: 90px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.progress-indicator .step {
+    width: 30px;
+    height: 30px;
+    background-color: #F0F0F0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #002040;
+    font-weight: bold;
+    z-index: 1;
+    transition: background-color 1s ease;
+}
+
+.progress-indicator .step.active {
+    background-color: #ffcc00;
+}
+
+.progress-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    right: 15px;
+    height: 4px;
+    background-color: #F0F0F0;
+    z-index: 0;
+}
+
+.progress-indicator .step.active ~ .step::before {
+    background-color: #ffcc00;
+}
+.progress-line {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    height: 4px;
+    background-color: #ffcc00;
+    width: 0;
+    transition: width 1s ease;
+    z-index: 0;
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.faq {
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: #002040;
+    color: #ffcc00;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #ffcc00;
+    color: #002040;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-left: 3px solid #002040;
+}
+
+.info-icon {
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+    color: #002040;
+}
+
+.info-text {
+    display: none;
+    font-size: 12px;
+    color: #888;
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+.sidebar {
+    width: 15%;
+    padding-right: 20px;
+    /* border-right: 1px solid #ffcc00; */
+    background-color: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  
+}
+.steps-list {
+    list-style: none;
+    padding: 0;
+}
+
+.steps-list li {
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* background-color: #f0f0f0; */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #002040;
+    border-bottom: 1px solid #002040;
+}
+
+.steps-list li.active {
+    background-color: #ffcc00;
+    color: #002040;
+}
+.motivation-word{
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffcc00;
+    padding-bottom: 30px;
+}
+
+.info-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #ffcc00;
+    color: #002040;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 50%; /* Align vertically with the icon */
+    left: 140%; /* Position to the right of the icon */
+    margin-top: -20px; /*Adjust to vertically center the tooltip*/
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* Position the arrow on the left side */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #ffcc00 transparent transparent;
+}
+
+.info-icon:hover .tooltip-text,
+.info-icon .tooltip-text.show {
+    visibility: visible;
+    opacity: 1;
+}
+/* #investmentForm{
+    border: 1px solid red;
+    height: 70%;
+} */
+/* .select2-container {
+    width: 100% !important;
+} */

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Startup Requests</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/startup-card-admin.css" />
+  </head>
+  <body>
+    <div class="containerr">
+
+      <div class="sidebar">
+        <h2>Advisor Dashboard</h2>
+        <ul>
+          <li><a href="/advisor/index">Home</a></li>
+          <li><a href="/advisor/startups">Startup Requests</a></li>
+          <li><a href="/advisor/meetings">Schedule Meetings</a></li>
+          <li><a href="/advisor-dashboard">Chat Requests</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h1>Startup Requests</h1>
+        <% if (startup.length > 0) { %>
+        <% startup.forEach(startup => { %>
+        <div class="containerSP">
+            
+          <div class="info">
+            <img src="/uploads/<%= startup.logo %>" alt="suez canal" class="img" />
+            <h2>starup name : <%= startup.companyName %></h2>
+            <p>startup description: <%= startup.businessExplanation %></p>
+            <button class="btn1">Details</button>
+          </div>
+          
+        </div>
+        <% }) %>
+        <% } else { %>
+        <p>No startup requests available.</p>
+        <% } %>
+      </div>
+    </div>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

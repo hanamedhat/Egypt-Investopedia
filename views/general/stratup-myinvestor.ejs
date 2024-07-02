@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Investors</title>
+    <link rel="stylesheet" href="/css/myinvestor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+        <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <span style="display: none;" id="userSpan"><%=user.userid%></span>
+        <% }else{%>
+            <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <%} %>
+    <header>
+        <ul>
+            <li><a href="/egypt-investopedia/startup-profile/<%=user.userid%>">My Startup</a></li>
+            <li><a href="/egypt-investopedia/startup-profile/myinvestor/<%=user.userid%>">My Investors</a></li>
+            <li><a href="/egypt-investopedia/startup-profile/offers/<%=user.userid%>">My Offers</a></li>
+        </ul>
+        <div class="profile-name">
+            <span><%= user.firstName.charAt(0).toUpperCase() %><%= user.lastName.charAt(0).toUpperCase() %></span>
+        </div>
+    </header>
+    <main>
+        <section class="investors">
+            <h1>My Investors</h1>
+            <h1>Investors in partnership with</h1>
+            <div class="partnership-investors">
+                <% if (investors.length === 0) { %>
+                    <p>No investors yet.</p>
+                  <% } else { %>
+                    <% investors.forEach(investor => { %>
+                      <div class="investor">
+                        <img class="investor-image" src="images/dbbg.jpg" height="150px" width="150px" alt="Investor Image"><br>
+                        <span>Investor Name</span><h2><%= investor.firstName %> <%= investor.lastName %></h2>
+                        <p><strong>Investment Amount:</strong> $<%= investor.Investments[0].amountInvested %></p>
+                        <p><strong>Contact Details:</strong> <%= investor.email %></p>
+                        <p><strong>Notes:</strong> Excited to see where this collaboration will take us.</p>
+                        <button disabled>Start Chat</button>
+                      </div>
+                    <% }); %>
+                  <% } %>
+            </div>
+           
+        </section>
+    </main>
+    <%- include('../includes/footer.ejs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <script src="/js/myinvestor.js"></script>
+</body>
+</html>

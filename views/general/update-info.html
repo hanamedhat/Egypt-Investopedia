@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Info Edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card h5 {
+            color: #002040;
+        }
+        .card p {
+            margin: 0;
+        }
+        .card .info-label {
+            color: #888888;
+            font-size: 0.9em;
+        }
+        .card .info-value {
+            color: #002040;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h5>Basic info</h5>
+            <p class="text-muted">Some info may be visible to other people using Google services.</p>
+            <div class="info-item">
+                <p class="info-label">Profile picture</p>
+                <p class="info-value">A profile picture helps personalize your account</p>
+            </div>
+            <hr>
+            <div class="info-item" data-toggle="modal" data-target="#editModal" data-field="name" data-value="Hannah Medhat">
+                <p class="info-label">Name</p>
+                <p class="info-value">Hannah Medhat</p>
+            </div>
+            <hr>
+            <div class="info-item" data-toggle="modal" data-target="#editModal" data-field="birthday" data-value="August 16, 2002">
+                <p class="info-label">Birthday</p>
+                <p class="info-value">August 16, 2002</p>
+            </div>
+            <hr>
+            <div class="info-item" data-toggle="modal" data-target="#editModal" data-field="gender" data-value="Female">
+                <p class="info-label">Gender</p>
+                <p class="info-value">Female</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5>Contact info</h5>
+            <div class="info-item" data-toggle="modal" data-target="#editModal" data-field="email" data-value="hannahghanem45@gmail.com">
+                <p class="info-label">Email</p>
+                <p class="info-value">hannahghanem45@gmail.com</p>
+            </div>
+            <hr>
+            <div class="info-item" data-toggle="modal" data-target="#editModal" data-field="phone" data-value="012 26228360">
+                <p class="info-label">Phone</p>
+                <p class="info-value">012 26228360</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="editField">Field</label>
+                            <input type="text" class="form-control" id="editField" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="editValue">New Value</label>
+                            <input type="text" class="form-control" id="editValue">
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges()">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Offers</title>
+    <link rel="stylesheet" href="/css/offer-investor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+      <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+          <i class="fa-solid fa-comment-dots"></i>
+      </div>
+      <span style="display: none;" id="userSpan"><%=user.userid%></span>
+      <% }else{%>
+          <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+          <i class="fa-solid fa-comment-dots"></i>
+      </div>
+      <%} %>
+    <header>
+        <ul>
+            <li><a href="/egypt-investopedia/investor-profile/<%=user.userid%>">My Profile</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/offers/<%=user.userid%>">My Offers</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/mystartups/<%=user.userid%>">My Startups</a></li>
+        </ul>
+        <div class="profile-name">
+          <span><%= user.firstName.charAt(0).toUpperCase() %><%= user.lastName.charAt(0).toUpperCase() %></span>
+        </div>
+    </header>
+    <main>
+        <section class="offers">
+            <h1>My Offers</h1>
+            <% offers.forEach(offer => { %>
+            <div class="offer">
+              <h2>Investment Offer</h2>
+              <div style="display: flex;">
+                <img style="margin-right: 2rem;" src="/uploads/<%= offer.Startup.logo %>" width="200" height="auto" alt="startup logo">
+                <div>
+                  <p><strong>Startup Name:</strong> <%= offer.Startup.companyName %></p>
+                  <p><strong>Investment Amount:</strong> $<%= offer.amount %></p>
+                  <p><strong>Offer Details:</strong> <%= offer.offerDescription %></p>
+                  <p><strong>Comment:</strong> <%= offer.offerComment %></p>
+                  <p><strong>Status:</strong> <%= offer.status %>
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">When the Startup Owner accept the offer the status will change to accepted then we will arrange a meeting.</span>
+                    </span>
+                  </p>
+                  <% if (offer.Meeting) { %>
+                    <p><strong>Meeting Date:</strong> <%= offer.Meeting.date %></p>
+                    <p><strong>Meeting Place:</strong> <%= offer.Meeting.place %></p>
+                    <% if (offer.Meeting.place.toLowerCase() === 'online') { %>
+                        <p><strong>Meeting Link: </strong> <a href="<%= offer.Meeting.link %>">Link</a></p>
+                    <% } else { %>
+                        <p><strong>Meeting Link: </strong> <%= offer.Meeting.link %></p>
+                    <% } %>
+                <% } else { %>
+                    <div class="actions">
+                        <button class="accept">Edit Offer</button>
+                        <p style="background-color: #002040; padding: 10px; color: white; border-radius: 5px; margin: 0;">We will arrange a meeting soon</p>
+                    </div>
+                <% } %>
+                 
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <script src="offers.js"></script>
+</body>
+</html>

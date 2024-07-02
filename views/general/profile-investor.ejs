@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Profile</title>
+    <link rel="stylesheet" href="/css/profile-investor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+        <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <span style="display: none;" id="userSpan"><%=user.userid%></span>
+        <% }else{%>
+            <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <%} %>
+    
+    <header>
+        <ul>
+            <li><a href="/egypt-investopedia/investor-profile/<%=user.userid%>">My Profile</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/offers/<%=user.userid%>">My Offers</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/mystartups/<%=user.userid%>">My Startups</a></li>
+        </ul>
+        <div class="profile-name">
+            <span><%= user.firstName.charAt(0).toUpperCase() %><%= user.lastName.charAt(0).toUpperCase() %></span>
+        </div>
+    </header>
+    <main>
+        <div class="investor-profile">
+            <div class="profile-header">
+                <form id="uploadForm" action="/egypt-investopedia/upload-photo/<%= user.userid %>" method="POST" enctype="multipart/form-data">
+                    <label for="profileImage">
+                        <img src="<%= investor.profileImage ? `/uploads/${investor.profileImage}` : '/images/dbbg(1) - Copy.jpg' %>" alt="Profile Picture" class="profile-picture" id="profilePic">
+                      <input type="file" name="profileImage" id="profileImage" style="display: none;">
+                    </label>
+                  </form>
+                <div class="profile-info">
+                    <h1><%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %> <%= user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1) %></h1>
+                    <p><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</p>
+                    <p><strong>Investment Range:</strong> <%= investor.wantedAmount %></p>
+                    <p><strong>Joined:</strong> <%= user.createdAt.toDateString() %></p>
+                </div>
+                <button class="manage-btn"> <i class="fas fa-edit"></i> Manage Profile</button>
+            </div>
+
+            <section class="profile-section">
+                <h2>About Me</h2>
+                <p><strong>Amount to Invest:</strong> $<%= investor.wantedAmount %></p>
+                <p><strong>Professional Background:</strong> <%= investor.profBackground %></p>
+                <p><strong>Area of Expertise:</strong> <%= investor.areaOfExpertise %></p>
+                <p><strong>Additional Value:</strong> <%= investor.additionalValue %></p>
+                <p><strong>Level of Involvement:</strong> <%= investor.involvementLevel %></p>
+            </section>
+
+            <section class="profile-section industries-section">
+                <h2>Industries of Interest</h2>
+                <div class="industries-container">
+                    <% JSON.parse(investor.industries).forEach(industry => { %>
+                        <div class="industry-card">
+                            <i class="fas fa-industry"></i>
+                            <p><%= industry %></p>
+                        </div>
+                    <% }) %>
+                </div>
+            </section>
+
+            <section class="profile-section">
+                <h2>Additional Information</h2>
+                <p><strong>Risk Tolerance:</strong> <%= investor.riskTolerance %></p>
+                <p><strong>ROI Expectations:</strong> <%= investor.roiExpectations %></p>
+                <p><strong>Preferred ROI Type:</strong> <%= investor.ROI %></p>
+                <p><strong>Investment Horizon:</strong> <%= investor.investmentHorizon %></p>
+                <p><strong>Comments:</strong> <%= investor.comments %></p>
+                <p><strong>Preferred Investment Type:</strong> <%= investor.investmentType %></p>
+                <p><strong>Reason for Preference:</strong> <%= investor.preference %></p>
+            </section>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <!-- <script src="/js/chat.js"></script> -->
+</body>
+</html>

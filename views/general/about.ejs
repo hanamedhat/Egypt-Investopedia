@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About US</title>
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+        <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <span style="display: none;" id="userSpan"><%=user.userid%></span>
+        <% }else{%>
+            <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <%} %>
+
+    <div class="who-are-we">
+        <div class="who-heading">
+            <!-- <div class="linee"></div> -->
+            <h1>WHO ARE WE</h1>
+            <!-- <div class="linee"></div> -->
+        </div>
+        <div class="who-contents">
+            <div class="who-content">
+                <span>EGYPT INVESTOPEDIA</span>  <p>is a vibrant ecosystem designed to bring together startups and investors in a collaborative environment. We understand that innovative ideas need the right support and resources to flourish, and we are dedicated to making those connections happen. Our team comprises experienced professionals from various backgrounds, including technology, finance, and entrepreneurship, all committed to driving success for both startups and investors.</p>
+            </div> 
+            <img height="270px" width="270px" src="/images/logograd2.svg" alt="">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" height="400px" viewBox="0 -960 960 960" width="400px" fill="#ffcc00"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"/></svg>     -->
+        </div>
+    </div>
+    <div class="our-vision">
+        <div class="vision-heading">
+            <h1 id="vision" class="show">OUR VISION</h1>
+            <h1 id="mission" class="hide">OUR MISSION</h1>
+            <h1 id="values" class="hide">OUR VALUES</h1>
+        </div>
+        <div class="vision-bg">
+            <div class="bg">
+                <div class="op"></div>
+            </div>
+            <div class="vision-circles">
+                <div class="vision-first-circle circle">
+                    <i class="fa-solid fa-binoculars"></i>
+                </div>
+                <div class="vision-second-circle circle">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <div class="vision-third-circle circle">
+                    <i class="fa-regular fa-gem"></i>
+                </div>
+            </div>
+        </div>
+      
+        <div class="vision-content">
+            <div class="vision-paragraph">
+                <h1 style="color: #ffcc00;">Vision</h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod natus itaque quasi suscipit animi voluptatum saepe numquam hic dolores ut, aliquid dolor quas illo veniam vero similique maiores, id rem!</p>
+            </div>
+            <div class="mission-paragraph">
+                <h1 style="color: #002040;">Mission</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus debitis aliquid quibusdam cum nihil. Inventore impedit provident temporibus. Accusamus corrupti repudiandae voluptatum doloremque aspernatur necessitatibus quam laborum voluptas dignissimos quidem.</p>
+            </div>
+            <div class="values-paragraph">
+                <h1 style="color: #ffcc00;">Values</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dicta modi expedita quaerat enim architecto corporis, itaque eius esse ut? Ipsam, aliquid. Cum expedita ducimus voluptatem autem incidunt, tempore at.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="our-commitment" class="commitment-section">
+        <div class="commitment-container">
+            <h2>Our Commitment</h2>
+            <div class="commitment-grid">
+                <div class="commitment-item">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h3>Transparency</h3>
+                    <p>We ensure a transparent process for all our users, providing clear and honest information at every step.</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fa-solid fa-gears"></i>
+                    <h3>Efficiency</h3>
+                    <p>Our platform is designed to facilitate quick and effective connections between startups and investors.</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fa-solid fa-headset"></i>
+                    <h3>Support</h3>
+                    <p>We provide continuous support to our users, helping them navigate the complexities of the investment landscape.</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fa-solid fa-handshake"></i>
+                    <h3>Collaboration</h3>
+                    <p>We foster a collaborative environment where startups and investors can thrive together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fees-and-payments" class="fees-section">
+        <div class="fees-container">
+           
+            <h2>Fees and Payments</h2>
+            <div class="fees-cards">
+                <div class="fees-card">
+                    <div class="fees-icon-container">
+                        <i class="fas fa-bullhorn fees-icon"></i>
+                    </div>
+                    <div class="fees-content">
+                        <h3>Showcase Fee</h3>
+                        <p>We charge a fee for showcasing your startup on our platform, ensuring maximum visibility to potential investors.</p>
+                    </div>
+                </div>
+                <div class="fees-card">
+                    <div class="fees-icon-container">
+                        <i class="fas fa-percentage fees-icon"></i>
+                    </div>
+                    <div class="fees-content">
+                        <h3>Transaction Fee</h3>
+                        <p>We take a 1% fee on every investment transaction to sustain our platform and continue providing top-notch services.</p>
+                    </div>
+                </div>
+                <div class="fees-card">
+                    <div class="fees-icon-container">
+                        <i class="fas fa-crown fees-icon"></i>
+                    </div>
+                    <div class="fees-content">
+                        <h3>Premium Services</h3>
+                        <p>Access to our financial advisor is a premium feature. Users can subscribe to this service for expert guidance on investments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../includes/footer.ejs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+      <script src="/js/about.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

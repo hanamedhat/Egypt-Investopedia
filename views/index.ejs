@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat System</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Chat System</h1>
+    <button id="startChat" onclick="startChat()">start chat</button>
+    <div id="chat" class="chat-box">
+      <input type="text" id="senderInput" placeholder="Your name" />
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+      <button onclick="endChat()">End</button>
+    </div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+    const socket = io();
+    let room_id;
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('roomJoined', (data) => {
+      room_id = data.room_id;
+      console.log(`Joined room: ${room_id}`);
+    });
+
+    socket.on('newMessage', (data) => {
+      console.log("New message received:", data);
+      displayMessage(data.sender, data.message);
+    });
+
+    socket.on('roomClosed', (data) => {
+      console.log(`Room closed: ${data.room_id}`);
+      const chatBox = document.getElementById(`chat`);
+      const chat = document.querySelector('.data-chat');
+      if (chatBox) {
+        chatBox.style.display = 'none';
+      }
+      if (chat) {
+        chat.remove();
+      }
+    });
+
+    function sendMessage() {
+      const sender = document.getElementById('senderInput').value.trim();
+      const receiver = 'Financial Advisor';
+      const message = document.getElementById('messageInput').value.trim();
+
+      if (sender === '' || message === '') {
+        alert('Please enter your name and message.');
+        return;
+      }
+        socket.emit('newMessage', { sender, receiver, message, room_id });
+        // socket.emit('joinRoom', { sender, receiver, message, room_id });
+        document.getElementById('messageInput').value = '';
+        console.log("the message sents succusfully")
+    }
+
+    function endChat(){
+      socket.emit("endChat", {  room_id });
+    }
+
+    function startChat(){
+      const sender = ''
+      const receiver = 'Financial Advisor';
+      const message =''
+      // console.log(message)
+      const role = "user";
+      console.log("print start chat")
+
+      socket.emit('joinRoom', { sender, receiver, role, message });
+      const chatBox = document.getElementById(`chat`);
+      if (chatBox) {
+        chatBox.style.display = 'inline';
+      }
+      const chat = document.createElement('div');
+      chat.classList.add('data-chat')
+      chatBox.appendChild(chat)
+    }
+
+    function displayMessage(sender, message) {
+      const chat = document.querySelector('.data-chat');
+      const messageElement = document.createElement('div');
+      messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chat.appendChild(messageElement);
+    }
+  </script>
+</body>
+</html>

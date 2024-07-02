@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Page</title>
+    <link rel="stylesheet" href="/css/package.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <div class="container">
+        <h1>Make the wise decision for your business</h1>
+        <p>Choose from our affordable 3 packages</p>
+        <div class="pricing-table">
+
+            <div class="pricing-card">
+                <h2>Startup Plan Package</h2>
+                <p class="price">10000EGP<span>/Year</span></p>
+                <p>Your business will be available in our website  </p>
+                <ul>
+                    <li>Attractive advertising for your business</li>
+                    <li>3 times check from our advisors to your business improvements </li>
+                    <li>1 year  Support</li>
+                    
+                   
+                </ul>
+                <form action="/pay" method="post">
+                    <input type="hidden" name="amount" value="10000">
+                    <button>Get Started</button>
+                </form>
+            </div>
+           
+            <div class="pricing-card">
+                <h2>Basic Plan for financial advisor</h2>
+                <p class="price">150EGP<span>/month</span></p>
+                <p>This package is suitable for new users.</p>
+                <ul>
+                    <li> Chatting with financial advisor </li>
+                    <li> Tax limitations plans </li>
+                    
+                    <li> Free Custom messages </li>
+                    <li> Plans to increase your profit </li>
+                    
+                </ul>
+                <form action="/pay" method="post">
+                    <input type="hidden" name="amount" value="150">
+                    <button>Get Started</button>
+                </form>
+            </div>
+           
+           
+            <div class="pricing-card">
+                <h2>Premium Plan for financial advisor</h2>
+                <p class="price">1500EGP<span>/Year</span></p>
+                <p>This package is suitable for our commited users</p>
+                <ul>
+
+                   <li>  Unlimited chatting with financial advisor </li>
+                    <li> Tax limitations plans </li>
+                    <li> Plans to increase your profit </li>
+                    <li> 1 meeting with financial advisor </li>
+                    <li> Unlimited Support </li>
+                    <li> Plans for improvements </li>
+                    
+                </ul>
+                <form action="/pay" method="post">
+                    <input type="hidden" name="amount" value="1500">
+                    <button>Get Started</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+    <%- include('../includes/chat.ejs') %>
+    <script src="js/chat.js"></script>
+    <script src="js/nav.js"></script>
+    <script>
+
+
+function getStarted(plan) {
+    alert(`You have selected the ${plan}`);
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+nav {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    /* top: 0;
+    z-index: 1; */
+    background-color: #002040;
+    /* border: 3px solid yellow; */
+}
+.logo-container {
+    display: flex;
+    margin-left: 2.5rem;
+    margin-top: 10px;
+    width: 30%;
+    transition: background-color 0.3s ease;
+}
+.logo-container p {
+    color: #ffcc00;
+    margin-left: 1rem;
+    margin-top: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+.links-container {
+    width: 60%;
+    margin-top: 2.1rem;
+}
+
+.links-container ul {
+    display: flex;
+    list-style: none;
+    margin: 0!important;
+    padding: 0!important;
+}
+.links-container ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 2rem;
+    position: relative; 
+    /* border: 1px solid white; */
+    display: flex;
+}
+.links-container ul li a:hover{
+    color: #ffcc00;
+}
+.links-container ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 0; /* Initially set width to 0 */
+    height: 3px; /* Adjust the thickness of the line */
+    background-color: #ffcc00; /* Change the color of the line */
+    transition: width 1s ease; /* Add transition for smooth effect */
+}
+.links-container ul li a:hover::before {
+    width: 100%; /* Expand the width to create the line */
+}
+.links-container ul li a i{
+    padding-right: 10px;
+}
+.logo {
+    height: 70px;
+    width: 70px;
+}
+.fa-bars {
+    color: white;
+    font-size: 28px;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+    display: none;
+    visibility: hidden;
+    margin-top: 1.2rem;
+}
+.logo-container.active {
+    background-color: #002040; /* Same color as the .links-container background */
+}
+.links-container.show {
+    max-height: 300px; /* Adjust this value based on the number of links */
+}
+.active{
+    background-color: #002040;
+    color: white;
+}

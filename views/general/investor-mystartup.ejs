@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Investors</title>
+    <link rel="stylesheet" href="/css/investor-mystartup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+        <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <span style="display: none;" id="userSpan"><%=user.userid%></span>
+        <% }else{%>
+            <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <%} %>
+    <header>
+        <ul>
+            <li><a href="/egypt-investopedia/investor-profile/<%=user.userid%>">My Profile</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/offers/<%=user.userid%>">My Offers</a></li>
+            <li><a href="/egypt-investopedia/investor-profile/mystartups/<%=user.userid%>">My Startups</a></li>
+        </ul>
+        <div class="profile-name">
+            <span><%= user.firstName.charAt(0).toUpperCase() %><%= user.lastName.charAt(0).toUpperCase() %></span>
+        </div>
+    </header>
+    <main>
+        <section class="investors">
+            <h1>My Startups</h1>
+            <h1>Startups in partnership with</h1>
+            <div class="row">
+              <% if (startups && startups.length > 0) { %>
+                <% startups.forEach(startup => { %>
+                  <div class="card">
+                    <div class="card-header">
+                      <img src="../images/dbbg(1) - Copy.jpg" alt="Main Image" class="main-image">
+                      <img src="../images/dbbg(2) - Copy.jpg" alt="Profile Picture" class="profile-pic">
+                    </div>
+                    <div class="card-content">
+                      <h2><%= startup.companyName %></h2>
+                      <p>Bahrain, Bahrain</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Libero iusto, dolor pariatur, quis cumque veritatis est culpa porro reiciendis repellat magni at sapiente quaerat provident ab, consequatur quam incidunt nostrum?</p>
+                      <ul class="highlights">
+                        <li>highlight1</li>
+                        <li>highlight2</li>
+                        <li>highlight3</li>
+                      </ul>
+                    </div>
+                    <div class="card-footer">
+                      <div>
+                        <p><strong>US$60,000</strong> Target</p>
+                        <p><strong>US$10,000</strong> Min per Investor</p>
+                      </div>
+                      <div>
+                        <button class="view-btn">View Startup</button>
+                        <button disabled class="start-btn">Start Chat</button>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <p><%= message %></p>
+              <% } %>
+            </div>
+          </section>          
+          
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <!-- <script src=".js"></script> -->
+</body>
+</html>

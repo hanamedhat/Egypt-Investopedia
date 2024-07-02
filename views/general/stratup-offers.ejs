@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Offers</title>
+    <link rel="stylesheet" href="/css/offers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+
+    <%- include('../includes/nav.ejs') %>
+    <% if(user.package === 'pending'){ %>
+      <div class="chat-icon" onclick="startChat(document.getElementById('userSpan').innerText)" id="chatIcon">
+          <i class="fa-solid fa-comment-dots"></i>
+      </div>
+      <span style="display: none;" id="userSpan"><%=user.userid%></span>
+      <% }else{%>
+          <div class="chat-icon" onclick="window.location.href = '/egypt-investopedia/Packages';" id="chatIcon">
+          <i class="fa-solid fa-comment-dots"></i>
+      </div>
+      <%} %>
+    <header>
+        <ul>
+            <li><a href="/egypt-investopedia/startup-profile/<%=user.userid%>">My Startup</a></li>
+            <!-- <li><a href="/egypt-investopedia/startup-profile/myinvestor/<%=user.userid%>">My Investors </a></li> -->
+            <li><a href="/egypt-investopedia/startup-profile/offers/<%=user.userid%>">My Offers</a></li>
+        </ul>
+        <div class="profile-name">
+            <span><%= user.firstName.charAt(0).toUpperCase() %><%=user.lastName.charAt(0).toUpperCase() %></span>
+        </div>
+    </header>
+    <main>
+        <section class="offers">
+          <h1>My Offers</h1>
+          <% if (offers.length === 0) { %>
+            <p>No offers found.</p>
+          <% } else { %>
+            <% offers.forEach(offer => { %>
+              <div class="offer">
+                <h2>Investment Offer</h2>
+                <p><strong>Investor Name:</strong> 
+                    <% if (offer.User) { %>
+                        <%= offer.User.firstName %> <%= offer.User.lastName %>
+                      <% } else { %>
+                        Investor not found
+                      <% } %>
+                </p>
+                <p><strong>Investment Amount:</strong> $<%= offer.amount %></p>
+                <p><strong>Offer Details:</strong> <%= offer.offerDescription %></p>
+                <p><strong>Comment:</strong> <%= offer.offerComment %></p>
+                <p><strong>Status:</strong> <%= offer.status %>
+                    <span class="info-icon" onclick="showTooltip(event)">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">If you accepted the offer we will arange a meeting soon!</span>
+                    </span>
+                </p>
+                <% if (offer.Meeting) { %>
+                  <div class="meeting-details">
+                    <p><strong>Meeting Date:</strong> <%= offer.Meeting.date %></p>
+                    <p><strong>Meeting Place:</strong> <%= offer.Meeting.place %></p>
+                    <% if (offer.Meeting.place.toLowerCase() === 'online') { %>
+                      <p><strong>Meeting Link: </strong> <a href="<%= offer.Meeting.link %>">Link</a></p>
+                    <% } else { %>
+                      <p><strong>Meeting Link: </strong> <%= offer.Meeting.link %></p>
+                    <% } }%>
+                  </div>
+                  <% if (!offer.Meeting) { %>
+                    <div class="actions">
+                      <form action="/offers/<%= offer.offerId %>/accept" method="POST">
+                        <button type="submit" class="accept">Accept</button>
+                      </form>
+                      <form action="/offers/<%= offer.offerId %>/reject" method="POST">
+                        <button type="submit" class="reject">Reject</button>
+                      </form>
+                      <form action="/offers/<%= offer.offerId %>/delete" method="POST">
+                        <button type="submit" class="delete">Delete</button>
+                      </form>
+                    </div>
+                  <% } %>
+              </div>
+            <% }) %>
+          <% } %>
+        </section>
+      </main>
+      
+    <%- include('../includes/footer.ejs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="/js/chat-user.js"></script>
+    <script src="/js/offers.js"></script>
+
+</body>
+</html>

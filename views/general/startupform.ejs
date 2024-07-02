@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Form</title>
+    <link rel="stylesheet" href="/css/startupform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+  .error{
+    color: #ffcc00;
+  }
+</style>
+  </head>
+<body>
+  <main>
+  <div class="sidebar">
+    <ul class="steps-list">
+        <li id="step1" onclick="showPages(1)">Startup Basic Info</li>
+        <li id="step2" onclick="showPages(2)">Startup Detailes</li>
+        <li id="step3" onclick="showPages(3)">Business Structure</li>
+        <li id="step4" onclick="showPages(4)">Investment Detailes</li>
+        <li id="step5" onclick="showPages(5)">Upload Documents</li>
+        <li id="step5" onclick="showPages(6)">Additional Information</li>
+        <li id="step5" onclick="showPages(7)">Team Information</li>
+        <li id="step6" onclick="showPages(8)">Review and Submit</li>
+    </ul>
+</div>
+    <div class="container">
+      <div class="left-side">
+        <div>
+          <p class="motivation-word">Seven steps to complete your startup profile!</p>
+          <div class="progress-indicator">
+            <div class="step" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+            <div class="step" id="step4">4</div>
+            <div class="step" id="step5">5</div>
+            <div class="step" id="step6">6</div>
+            <div class="step" id="step6">7</div>
+            <div class="step" id="step7">R</div>
+            <div class="progress-line"></div>
+          </div>
+        </div>
+        <form id="investmentForm" action="<%= startup && startup.startupId ? '/startups-info/update' : '/startups-info' %>" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="userid" value="<%= userId %>">
+          <input type="hidden" name="startupId" value="<%= startup ? startup.startupId : '' %>">
+          <!-- Page 1: Basic Information -->
+          <div class="form-page" id="page1">
+              <h1>Basic Information</h1>
+              <label for="name">1- Company name
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Enter the registered name of your company.</span>
+                </span>
+              </label>
+              <input type="text" id="name" name="companyName" value="<%= startup ? startup.companyName : '' %>" >
+              <% if (errors.companyName) { %>
+                <span class="error"><%= errors.companyName %></span>
+            <% } %>
+              <label for="base">2-Where is your company based?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Specify the city and country where your company operates.</span>
+                </span>
+              </label>
+              <input type="text" id="base" name="location" value="<%= startup ? startup.location : '' %>" >
+              <label for="address">3-Website (optional) or address
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Provide your company's website URL or physical address.</span>
+                </span>
+              </label>
+              <input type="text" id="address" name="website" value="<%= startup ? startup.website : '' %>">
+              <button type="button" class="next-btn" onclick="showPages(2)">Next</button>
+          </div>
+
+          <!-- Page 2: Project Details -->
+          <div class="form-page" id="page2" style="display:none;">
+              <h1>Project Details</h1>
+              <label for="industry">4-What is your project Industry?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Mention the industry your project belongs to (e.g., technology, healthcare).</span>
+                </span>
+              </label>
+              <select name="industry" id="industry">
+                <option value="" disabled selected>Select your industry</option>
+                <option value="Agriculture" <%= startup && startup.industry === 'Agriculture' ? 'selected' : '' %>>Agriculture</option>
+                <option value="Automotive" <%= startup && startup.industry === 'Automotive' ? 'selected' : '' %>>Automotive</option>
+                <option value="Biotechnology" <%= startup && startup.industry === 'Biotechnology' ? 'selected' : '' %>>Biotechnology</option>
+                <option value="Construction" <%= startup && startup.industry === 'Construction' ? 'selected' : '' %>>Construction</option>
+                <option value="Consumer Goods" <%= startup && startup.industry === 'Consumer Goods' ? 'selected' : '' %>>Consumer Goods</option>
+                <option value="Education" <%= startup && startup.industry === 'Education' ? 'selected' : '' %>>Education</option>
+                <option value="Energy" <%= startup && startup.industry === 'Energy' ? 'selected' : '' %>>Energy</option>
+                <option value="Entertainment" <%= startup && startup.industry === 'Entertainment' ? 'selected' : '' %>>Entertainment</option>
+                <option value="Finance" <%= startup && startup.industry === 'Finance' ? 'selected' : '' %>>Finance</option>
+                <option value="Food & Beverage" <%= startup && startup.industry === 'Food & Beverage' ? 'selected' : '' %>>Food & Beverage</option>
+                <option value="Healthcare" <%= startup && startup.industry === 'Healthcare' ? 'selected' : '' %>>Healthcare</option>
+                <option value="Hospitality" <%= startup && startup.industry === 'Hospitality' ? 'selected' : '' %>>Hospitality</option>
+                <option value="Information Technology" <%= startup && startup.industry === 'Information Technology' ? 'selected' : '' %>>Information Technology</option>
+                <option value="Manufacturing" <%= startup && startup.industry === 'Manufacturing' ? 'selected' : '' %>>Manufacturing</option>
+                <option value="Marketing" <%= startup && startup.industry === 'Marketing' ? 'selected' : '' %>>Marketing</option>
+                <option value="Media" <%= startup && startup.industry === 'Media' ? 'selected' : '' %>>Media</option>
+                <option value="Real Estate" <%= startup && startup.industry === 'Real Estate' ? 'selected' : '' %>>Real Estate</option>
+                <option value="Retail" <%= startup && startup.industry === 'Retail' ? 'selected' : '' %>>Retail</option>
+                <option value="Telecommunications" <%= startup && startup.industry === 'Telecommunications' ? 'selected' : '' %>>Telecommunications</option>
+                <option value="Transportation" <%= startup && startup.industry === 'Transportation' ? 'selected' : '' %>>Transportation</option>
+                <option value="Travel & Tourism" <%= startup && startup.industry === 'Travel & Tourism' ? 'selected' : '' %>>Travel & Tourism</option>
+                <option value="Fashion" <%= startup && startup.industry === 'Fashion' ? 'selected' : '' %>>Fashion</option>
+                <option value="Other" <%= startup && startup.industry === 'Other' ? 'selected' : '' %>>Other</option>
+              </select>
+              <% if (errors.industry) { %>
+                <span class="error"><%= errors.industry %></span>
+            <% } %>
+              <!-- <input type="text" id="industry" name="industry" required value="<%= //startup ? startup.industry : '' %>"> -->
+              <label for="shortsummary">5- Short summary of the business
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Provide a brief description of your business and its main activities.</span>
+                </span>
+              </label>
+              <textarea name="businessExplanation" id="shortsummary"><%= startup ? startup.businessExplanation : '' %></textarea>
+              <% if (errors.businessExplanation) { %>
+                <span class="error"><%= errors.businessExplanation %></span>
+            <% } %>
+              <label for="stage">6- In which stage is your project?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Indicate the current stage of your project (e.g., idea, startup, growth).</span>
+                </span>
+              </label>
+              <select name="stage" id="stage">
+                <option value="Achieving-Sales" <%= startup && startup.stage === 'Achieving-Sales' ? 'selected' : '' %>>Achieving Sales</option>
+                <option value="Breaking-Even"  <%= startup && startup.stage === 'Breaking-Even' ? 'selected' : '' %>>Breaking Even</option>
+                <option value="MVP-Finished-Product" <%= startup && startup.stage === 'MVP-Finished-Product' ? 'selected' : '' %>>MVP/Finished Product</option>
+                <option value="Other" <%= startup && startup.stage === 'Other' ? 'selected' : '' %>>Other</option>
+                <option value="Pre-Startup/R&D" <%= startup && startup.stage === 'Pre-Startup/R&D' ? 'selected' : '' %>>Pre-Startup/R&D</option>
+                <option value="Profitable" <%= startup && startup.stage === 'Profitable' ? 'selected' : '' %>>Profitable</option>
+              </select>
+              <!-- <input type="text" id="stage" name="stage" required value="<%= startup ? startup.stage : '' %>"> -->
+              <button type="button" class="prev-btn" onclick="showPages(1)">Previous</button>
+              <button type="button" class="next-btn" onclick="showPages(3)">Next</button>
+          </div>
+
+          <!-- Page 3: Business Structure -->
+          <div class="form-page" id="page3" style="display:none;">
+              <h1>Business Structure</h1>
+              <label for="legal">7- Legal structure
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Describe the legal structure of your company (e.g., LLC, corporation).</span>
+                </span>
+              </label>
+              <input type="text" id="legal" name="legalStructure" value="<%= startup ? startup.legalStructure : '' %>" >
+              <label for="Objective">8- Your Objective / future
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Share your company's future goals and objectives.</span>
+                </span>
+              </label>
+              <textarea name="objective" id="Objective"><%= startup ? startup.objective : '' %></textarea>
+              <label for="nprofit">9- Net profit of last year
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Enter the net profit your company earned in the last fiscal year.</span>
+                </span>
+              </label>
+              <input type="number" id="nprofit" name="nonProfit" value="<%= startup ? startup.nonProfit : '' %>" >
+              <% if (errors.nonProfit) { %>
+                <span class="error"><%= errors.nonProfit %></span>
+            <% } %>
+              <button type="button" class="prev-btn" onclick="showPages(2)">Previous</button>
+              <button type="button" class="next-btn" onclick="showPages(4)">Next</button>
+          </div>
+
+          <!-- Page 4: Investment Details -->
+          <div class="form-page" id="page4" style="display:none;">
+              <h1>Investment Details</h1>
+              <label for="amount">10- What is the Investment Amount?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Specify the total amount of investment you are seeking.</span>
+                </span>
+              </label>
+              <input type="number" id="amount" name="theDeal" value="<%= startup ? startup.theDeal : '' %>" >
+              <% if (errors.theDeal) { %>
+                <span class="error"><%= errors.theDeal %></span>
+            <% } %>
+              <label for="profit">11- If you did a previous round, how much did you raise?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">State the amount raised in any previous funding rounds.</span>
+                </span>
+              </label>
+              <input type="number" id="profit" name="target" value="<%= startup ? startup.target : '' %>" >
+              <label for="tprofit">12- How much are you raising in total?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Indicate the total amount you plan to raise from all funding rounds.</span>
+                </span>
+              </label>
+              <input type="number" id="tprofit" name="totalRaising" value="<%= startup ? startup.totalRaising : '' %>" >
+              <label for="role">13- What is the ideal investor role?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Describe the role you expect the investor to play (e.g., advisory, silent partner).</span>
+                </span>
+              </label>
+              <input type="text" id="role" name="investorRole" value="<%= startup ? startup.investorRole : '' %>" >
+              <label for="mprofit">14- What is the minimum investment per investor?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Specify the minimum amount each investor can contribute.</span>
+                </span>
+              </label>
+              <input type="number" id="mprofit" name="minInvestmentPp" value="<%= startup ? startup.minInvestmentPp : '' %>" >
+              <% if (errors.minInvestmentPp) { %>
+                <span class="error"><%= errors.minInvestmentPp %></span>
+            <% } %>
+              <label for="mprofit">15- How will you use the funds?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Specify the minimum amount each investor can contribute.</span>
+                </span>
+              </label>
+              <textarea name="usingFunds" id="usefunds"><%= startup ? startup.usingFunds : '' %></textarea>
+              <label for="mprofit">16- What do you like the type of investiment to be ?
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Specify the minimum amount each investor can contribute.</span>
+                </span>
+              </label>
+              <label for="">Loan</label>
+              <input type="radio" id="mprofit" value="Loan" name="investmentType" <%= startup && startup.investmentType === 'Loan' ? 'checked' : '' %> >
+              <label for="">Equity</label>
+              <input type="radio" id="mprofit" value="Equity" name="investmentType" <%= startup && startup.investmentType === 'Equity' ? 'checked' : '' %> >
+              <button type="button" class="prev-btn" onclick="showPages(3)">Previous</button>
+              <button type="button" class="next-btn" onclick="showPages(5)">Next</button>
+          </div>
+
+          <!-- Page 5: ROI Expectations -->
+          <div class="form-page" id="page5" style="display:none;">
+            <h1>Upload Documents</h1>
+            
+            <label for="financials" class="upload-label">17- Add financials</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="financials" name="addFinancials" onchange="updateFileName('financials', 'financials-filename')" value="<%= startup && startup.addFinancials ? startup.addFinancials : '' %>">
+                </button>
+                <span id="financials-filename"><%= startup && startup.addFinancials ? startup.addFinancials : '' %></span>
+            </div>
+
+            <label for="productimg" class="upload-label">18- Upload Product image</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="productimg" name="pImage" onchange="updateFileName('productimg', 'productimg-filename')" value="<%= startup && startup.pImage ? startup.pImage : '' %>">
+                </button>
+                <span id="productimg-filename"><%= startup && startup.pImage ? startup.pImage : '' %></span>
+            </div>
+            <% if (errors.pImage) { %>
+              <span class="error"><%= errors.pImage %></span>
+          <% } %>
+
+            <label for="uplogo" class="upload-label">19- Upload logo</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="uplogo" name="logo" onchange="updateFileName('uplogo', 'uplogo-filename')" value="<%= startup && startup.logo ? startup.logo : '' %>">
+                </button>
+                <span id="uplogo-filename"><%= startup && startup.logo ? startup.logo : '' %></span>
+            </div>
+            <% if (errors.logo) { %>
+              <span class="error"><%= errors.logo %></span>
+          <% } %>
+
+            <label for="upBP" class="upload-label">20- Upload your business plan</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="upBP" name="businessPlan" onchange="updateFileName('upBP', 'upBP-filename')" value="<%= startup && startup.businessPlan ? startup.businessPlan : '' %>">
+                </button>
+                <span id="upBP-filename"><%= startup && startup.businessPlan ? startup.businessPlan : '' %></span>
+            </div>
+
+            <label for="tax" class="upload-label">21- Upload your Tax register</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="tax" name="taxRegister" onchange="updateFileName('tax', 'tax-filename')" value="<%= startup && startup.taxRegister ? startup.taxRegister : '' %>">
+                </button>
+                <span id="tax-filename"><%= startup && startup.taxRegister ? startup.taxRegister : '' %></span>
+            </div>
+
+            <label for="upCR" class="upload-label">22- Upload your Commercial record</label>
+            <div class="upload">
+                <button type="button" class="btn-warning">
+                    <i class="fa fa-upload"></i> Upload File
+                    <input type="file" id="upCR" name="commercialRec" onchange="updateFileName('upCR', 'upCR-filename')" value="<%= startup && startup.commercialRec ? startup.commercialRec : '' %>">
+                </button>
+                <span id="upCR-filename"><%= startup && startup.commercialRec ? startup.commercialRec : '' %></span>
+            </div>
+            
+            <button type="button" class="prev-btn" onclick="showPages(4)">Previous</button>
+            <button type="button" class="next-btn" onclick="showPages(6)">Next</button>
+          </div>
+
+
+          <!-- Page 6: Additional Information -->
+          <div class="form-page" id="page6" style="display:none;">
+              <h1>Additional Information</h1>
+              <label for="milestones">23- Key Milestones Achieved
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">List the key milestones your company has achieved so far.</span>
+                </span>
+              </label>
+              <textarea name="progress" id="milestones"><%= startup ? startup.progress : '' %></textarea>
+              <label for="risks">24- Main Risks and Challenges
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Describe the main risks and challenges your business faces.</span>
+                </span>
+              </label>
+              <textarea name="risks" id="risks"><%= startup ? startup.risks : '' %></textarea>
+              <label for="market">25- The Market
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Describe the main risks and challenges your business faces.</span>
+                </span>
+              </label>
+              <textarea name="theMarket" id="market"><%= startup ? startup.theMarket : '' %></textarea>
+              <button type="button" class="prev-btn" onclick="showPages(5)">Previous</button>
+              <button type="button" class="next-btn" onclick="showPages(7)">Next</button>
+          </div>
+
+            <!-- Page 5: Team Information -->
+            <div class="form-page" id="page7" style="display:none;">
+              <h1>Team Information</h1>
+              <label for="teamSize">26- Are you the only founder of the startup (if no Please tell us there names and contact info)
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Enter the total number of team members in your startup.</span>
+                </span>
+              </label>
+              <textarea id="teamSize" name="founders" ><%= startupOwner ? startupOwner.founders : '' %></textarea>
+              <label for="teamSize">27- Biography
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Enter the total number of team members in your startup.</span>
+                </span>
+              </label>
+              <textarea id="teamSize" name="biography" ><%= startupOwner ? startupOwner.biography : '' %></textarea>
+              <label for="teamRoles">28- Key team roles and responsibilities
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">List the key roles in your team and their main responsibilities.</span>
+                </span>
+              </label>
+              <textarea name="teamRoles" id="teamRoles"  ><%= startupOwner ? startupOwner.teamRoles : '' %></textarea>
+              <label for="experience">29- Team's experience and expertise
+                <span class="info-icon" onclick="showTooltip(event)">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="tooltip-text">Describe the experience and expertise of your core team members.</span>
+                </span>
+              </label>
+              <textarea name="experience" id="experience" ><%= startupOwner ? startupOwner.experience : '' %></textarea>
+              <button type="button" class="prev-btn" onclick="showPages(6)">Previous</button>
+              <button type="button" class="next-btn" onclick="showPages(8)">Next</button>
+          </div>
+          <!-- Page 7: Review and Submit -->
+          <div class="form-page" id="page8" style="display:none;">
+              <h1>Review and Submit</h1>
+              <p>Review all your information before submitting.</p>
+              <div id="review"></div>
+              <!-- Add logic to review the form fields here -->
+              <button type="button" class="prev-btn" onclick="showPages(7)">Previous</button>
+              <button type="button" class="review-btn" onclick="reviewData()">Review Data</button>
+              <button type="submit" id="submit" class="submit-btn">Submit</button>
+          </div>
+      </form>
+    </div>
+    <div class="right-side">
+      <div class="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq">
+              <button class="faq-question">What are the benefits of filling out this form for a startup owner?</button>
+              <div class="faq-answer">
+                  <p>This form helps startup owners articulate their investment needs and preferences, enabling us to connect them with suitable investors and resources.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">How can my startup's information be utilized?</button>
+              <div class="faq-answer">
+                  <p>Your startup's information is used to match you with potential investors, mentors, and resources that align with your goals and objectives.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">Is there an option to save my progress and resume later?</button>
+              <div class="faq-answer">
+                  <p>Currently, the form needs to be completed in one session, but we are actively working on implementing a feature to save progress for convenience.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">How can I get support for any issues or questions?</button>
+              <div class="faq-answer">
+                  <p>If you require assistance or have any questions, please don't hesitate to contact our support team at support@example.com.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">What types of startups do you typically work with?</button>
+              <div class="faq-answer">
+                  <p>We work with startups across various industries and stages of development, from early-stage ventures to more established companies.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">How long does it take to receive feedback after submitting the form?</button>
+              <div class="faq-answer">
+                  <p>We strive to provide prompt feedback. Typically, you can expect to hear back from us within 2-3 business days after submitting the form.</p>
+              </div>
+          </div>
+          <div class="faq">
+              <button class="faq-question">Are there any fees associated with filling out this form?</button>
+              <div class="faq-answer">
+                  <p>No, there are no fees associated with filling out the form. Our services are free for startup owners seeking investment opportunities and support.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+      </div>
+</main>
+    <script src="/js/startupform.js"></script>
+</body>
+</html>

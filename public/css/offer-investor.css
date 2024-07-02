@@ -1,0 +1,223 @@
+/* styles.css */
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+nav {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    /* position: absolute;
+    top: 0;
+    z-index: 1; */
+    background-color: #002040;
+    /* border: 3px solid yellow; */
+}
+.logo-container {
+    display: flex;
+    margin-left: 2.5rem;
+    margin-top: 10px;
+    width: 30%;
+    transition: background-color 0.3s ease;
+}
+.logo-container p {
+    color: #ffcc00;
+    margin-left: 1rem;
+    margin-top: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+.links-container {
+    width: 60%;
+    margin-top: 1.5rem;
+}
+
+.links-container ul {
+    display: flex;
+    list-style: none;
+}
+.links-container ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 2rem;
+    position: relative; 
+    /* border: 1px solid white; */
+    display: flex;
+}
+.links-container ul li a:hover{
+    color: #ffcc00;
+}
+.links-container ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 0; /* Initially set width to 0 */
+    height: 3px; /* Adjust the thickness of the line */
+    background-color: #ffcc00; /* Change the color of the line */
+    transition: width 1s ease; /* Add transition for smooth effect */
+}
+.links-container ul li a:hover::before {
+    width: 100%; /* Expand the width to create the line */
+}
+.links-container ul li a i{
+    padding-right: 10px;
+}
+.logo {
+    height: 70px;
+    width: 70px;
+}
+.fa-bars {
+    color: white;
+    font-size: 28px;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+    display: none;
+    visibility: hidden;
+    margin-top: 1.2rem;
+}
+.logo-container.active {
+    background-color: #002040; /* Same color as the .links-container background */
+}
+.links-container.show {
+    max-height: 300px; /* Adjust this value based on the number of links */
+}
+
+header {
+    background-color: #ffcc0083;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+header ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    margin-right: 20px;
+}
+
+header ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #002040;
+}
+
+.profile-name {
+    background-color: #002040; /* Yellow profile background */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffcc00; /* Dark blue text */
+    font-weight: bold;
+}
+
+main {
+    padding: 20px 100px;
+}
+
+.offers {
+
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ffcc00b1;
+    border-radius: 10px;
+}
+
+.offers h1 {
+    color: #00274d; /* Dark blue text */
+    margin-bottom: 20px;
+}
+
+.offer {
+    border: 1px solid #00274dad;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.offer h2 {
+    margin-top: 0;
+    color: #00274d; /* Dark blue text */
+}
+
+.offer p {
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.accept {
+    background-color:#ffcc00 ;
+    color: #00204d;
+}
+
+.reject {
+    background-color:#00204d ;
+    color: white;
+}
+.info-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 350px;
+    background-color: #ffcc00;
+    color: #002040;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 35%; /* Align vertically with the icon */
+    left: 140%; /* Position to the right of the icon */
+    margin-top: -20px; /*Adjust to vertically center the tooltip*/
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 35%;
+    right: 100%; /* Position the arrow on the left side */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #ffcc00 transparent transparent;
+}
+
+.info-icon:hover .tooltip-text,
+.info-icon .tooltip-text.show {
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="/css/startup-details-page.css" />
+    <link rel="stylesheet" href="/css/nav.css">
+    <title>Document</title>
+  </head>
+  <%- include('../includes/nav.ejs') %>
+ 
+
+  <body>
+    <header class="banner">
+      <img src="/uploads/<%= startup.pImage %>" class="banner-img" alt="">
+        <div class="head">
+          <img src="/uploads/<%=startup.logo%>" alt="" width="100px" height="100px" />
+          <div> 
+            <h2 class="startup-name">
+              <%= startup.companyName %>
+            </h2>
+            <span><i class="fa-solid fa-location-dot"></i> <%= startup.location %></span>
+          </div>
+        </div>
+      </header>
+    <main class="bg">
+        <!-- <input type="hidden" name="userid" value="<%= //user.userid %>"> -->
+        <header class="header-links">
+         
+              <ul>
+                  <li><a href="">Overview</a></li>
+                  <li><a href="">The Market</a></li>
+                  <li><a href="">The Team</a></li>
+                  <li><a href="">Documents</a></li>
+                  <li><a href="">Objectives</a></li>
+              </ul>
+              <a  href="/send-offer/<%= startup.startupId %>"><button class="btnnn">Invest</button></a>
+      </header>
+    </main>
+
+    <div class="overview">
+      <div class="short-summary">
+        <div class="notice">
+          <p>
+            Please note: Investing in early stage businesses involves risks,
+            including illiquidity, lack of dividends, loss of investment and
+            dilution, and it should be done only as part of a diversified
+            portfolio. This platform is targeted solely at investors who are
+            sufficiently sophisticated to understand these risks and make their
+            own investment decisions. Investors are encouraged to review and
+            evaluate the investments and determine at their own discretion, the
+            appropriateness of making the particular investment. The information
+            on this website is provided for informational purposes only, but we
+            cannot guarantee that the information is accurate or complete. We
+            strongly encourage investors to complete their own due diligence
+            with licensed professionals, prior to making any investment and will
+            not offer any legal or tax advice.
+          </p>
+        </div>
+
+        <h2>Short Summary</h2>
+        <p>
+            <%= startup.businessExplanation%>
+        </p>
+        <h2>The Business</h2>
+      
+        <p><%=startupOwner.experience %></p>
+        
+
+
+      <h2>The Market</h2>
+      <p><%= startup.theMarket %></p>
+
+
+      <h2>Progress/Proof</h2>
+      <p><%= startup.progress %></p>
+
+
+      </div>
+
+      <div class="overview-details">
+        <h2 style="margin-left: 0;">Overview</h2>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Target:</td>
+              <td>$<%= startup.theDeal %></td>
+            </tr>
+            <tr>
+              <td>Minimum:</td>
+              <td>$<%= startup.minInvestmentPp %></td>
+            </tr>
+            <tr>
+              <td>Investment Raised:</td>
+              <td>$<%=startup.totalRaising%></td>
+            </tr>
+            <tr>
+              <td>Net Profit Last Year:</td>
+              <td>$<%= startup.nonProfit %></td>
+            </tr>
+            <tr>
+              <td>Stage:</td>
+              <td><%= startup.stage %></td>
+            </tr>
+            <tr>
+              <td>Investor Role:</td>
+              <td><%= startup.investorRole %></td>
+            </tr>
+            <tr>
+              <td>Industry:</td>
+              <td><%= startup.industry %></td>
+            </tr>
+            <tr>
+              <td>Investment Type:</td>
+              <td><%= startup.investmentType %></td>
+            </tr>
+            <tr>
+              <td>Investment Type:</td>
+              <td><%= startup.legalStructure %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+     
+
+      <h2>Objectives/Future</h2>
+      <p> <%= startup.objective %>
+      </p>
+     <p>
+      The year 2024: £50m of Purchases<br /><br />
+      The year 2025: £100m of Purchases<br /><br />
+      The year 2026: £150m of Purchases<br /><br />
+      The year 2027: £200m of Purchases<br /><br />
+
+      <%= startup.risks %></p> 
+
+      <h2>The Team</h2>
+      <p>
+        Led by our inspiring founder, <%= startup.User.firstName %> <%= startup.User.lastName %> has built a reputation as a
+        leading property entrepreneur.<br />
+
+        <%= startupOwner.founders %>
+
+       <%= startupOwner.teamRoles %> <br />
+        individuals and investment companies maximise growth and profits.
+        Now,<br />
+       <%= startupOwner.biography %>
+      </p>
+
+    </div>
+    <div class="deal">
+      <h2>The Deal</h2>
+      <p>
+        Looking for $<%= startup.theDeal %> - Min per Investor $<%= startup.minInvestmentPp %> Boasting enticing
+        fixed returns of 20% p.a., it propels investors into the heart of the UK
+        property market,
+        <br />
+        sidestepping the intricacies, costs and complications of direct property
+        investment. <br /><br />
+
+        <%= startup.usingFunds %><br />
+        and long-term growth linked to the UK housing market. With its flexible
+        terms, <br />
+        it provides the agility you need in a dynamic investment landscape.
+        <br /><br />
+
+        Your loyalty is rewarded with a bonus between 5% - 15% on exit.
+      </p>
+
+      <div class="mb-5 d-flex justify-content-around">
+        <a  href="/send-offer/<%= startup.startupId %>"> <button id="btnd">I'm Interested</button></a>
+      </div>
+    </div>
+
+    <div>
+      <h2>Documents</h2>
+      <div class="docs">
+        <div class="doc">
+          <h4>Business Plan</h4>
+          <a  href="/uploads/<%= startup.businessPlan %>" download><button class="btnnn"><i class="fa-solid fa-download"></i>Business Plan</button></a>
+        </div>
+        <div class="doc">
+          <h4>Commercial Record</h4>
+          <a href="/uploads/<%= startup.commercialRec %>" download><button class="btnnn"><i class="fa-solid fa-download"></i>Commercial Record</button></a>
+        </div>
+        <div class="doc">
+          <h4>Tax Register</h4>
+          <a href="/uploads/<%= startup.taxRegister %>" download><button class="btnnn"><i class="fa-solid fa-download"></i>Tax Register</button></a>
+        </div>
+        <div class="doc">
+          <h4>Financials</h4>
+          <a href="/uploads/<%= startup.addFinancials %>" download><button class="btnnn"><i class="fa-solid fa-download"></i>Financials</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="help">
+      <h2>Got a question about this project ?</h2>
+      <p>
+        If you need any more info, you can contact the Financial advisor
+        directly.
+      </p>
+      <div class="mb-5 d-flex justify-content-around">
+        <a  href="/egypt-investopedia/Packages"><button style="cursor: pointer;" id="btnd">Ask our advisor</button></a>
+        <br /><br />
+      </div>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+    <script>
+      var btn = document.getElementById("naaav");
+      var nav = document.getElementById("navBar");
+      btn.addEventListener("click", () => {
+        nav.classList.toggle("appear");
+      });
+      document
+        .getElementById("navToggle")
+        .addEventListener("click", function () {
+          /*const navLinks = document.getElementById('ull');*/
+          navLinks.classList.toggle("active");
+        });
+    </script>
+  </body>
+</html>
